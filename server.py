@@ -83,7 +83,16 @@ app.add_middleware(
 )
 
 # Load data into memory for high-speed API responses
-conn = get_db_connection("upi_fraud_analytics.db")
+db_file = "upi_fraud_analytics.db"
+if not os.path.exists(db_file):
+    try:
+        from pipeline import run_pipeline
+        print("[AgentIQ] upi_fraud_analytics.db not found. Running pipeline ETL...")
+        run_pipeline()
+    except Exception as e:
+        print(f"[AgentIQ] Warning during pipeline auto-initialization: {e}")
+
+conn = get_db_connection(db_file)
 df_tx = pd.read_sql_query("SELECT * FROM transactions", conn)
 df_kyc = pd.read_sql_query("SELECT * FROM customers", conn)
 df_merchants = pd.read_sql_query("SELECT * FROM merchants", conn)
@@ -833,8 +842,26 @@ def get_api_keys_status():
                 "status": "ACTIVE" if resend_k else "INACTIVE"
             }
         },
-        "engine": "AgentIQ Autonomous Sentinel v2.4"
-    }
+# ==========================================
+# 11. SERVE FRONTEND STATIC ASSETS (RENDER / PRODUCTION)
+# ==========================================
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+
+frontend_dist = os.path.join(os.path.dirname(os.path.abspath(__file__)), "transorg-agentiq-frontend", "dist")
+if os.path.exists(frontend_dist):
+    assets_dir = os.path.join(frontend_dist, "assets")
+    if os.path.exists(assets_dir):
+        app.mount("/assets", StaticFiles(directory=assets_dir), name="assets")
+
+    @app.get("/{full_path:path}")
+    async def serve_spa(full_path: str):
+        if full_path.startswith("api") or full_path.startswith("docs") or full_path.startswith("openapi.json"):
+            raise HTTPException(status_code=404, detail="Endpoint not found")
+        file_path = os.path.join(frontend_dist, full_path)
+        if os.path.exists(file_path) and os.path.isfile(file_path):
+            return FileResponse(file_path)
+        return FileResponse(os.path.join(frontend_dist, "index.html"))
 
 
 if __name__ == "__main__":

@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: agentiq-analytics
+    env: python
+    plan: free
+    region: oregon
+    buildCommand: "pip install -r requirements.txt && cd transorg-agentiq-frontend && npm install && npm run build && cd .."
+    startCommand: "uvicorn server:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false

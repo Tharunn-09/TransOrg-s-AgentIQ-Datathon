@@ -395,6 +395,7 @@ def get_customer_clusters():
         'Low-Risk Prime Transactors': '#114C5A'
     }
     
+    rng = np.random.RandomState(42)
     customer_clusters = []
     for c_name, color in cluster_colors.items():
         subset = clustered_cust[clustered_cust['cluster_name'] == c_name].head(30)
@@ -402,7 +403,7 @@ def get_customer_clusters():
         max_cb = max(1, clustered_cust['cb_count'].max())
         pts = []
         for _, row in subset.iterrows():
-            x_val = min(100, max(5, (row['tx_count'] / max_tx) * 100))
+            x_val = min(100, max(5, (row['tx_count'] / max_tx) * 100 + rng.uniform(-3, 3)))
             y_val = min(100, max(5, (row['cb_count'] / max_cb) * 100 + (row['risk_score'] * 0.4)))
             pts.append({'x': round(float(x_val), 1), 'y': round(float(y_val), 1)})
         customer_clusters.append({

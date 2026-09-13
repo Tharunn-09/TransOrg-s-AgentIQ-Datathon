@@ -1,20 +1,24 @@
 import { REAL_DATASET_SNAPSHOT } from './datasetSnapshot';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+const isCloudHosted = typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (isCloudHosted ? '' : 'http://localhost:8000');
 
 async function fetchWithFallback<T>(endpoint: string, fallbackData: T): Promise<T> {
+  // In cloud environment without custom backend URL, immediately serve the real dataset snapshot
+  if (isCloudHosted && !import.meta.env.VITE_API_BASE_URL) {
+    return fallbackData;
+  }
+
   try {
     const res = await fetch(`${API_BASE_URL}${endpoint}`, {
       headers: { 'Content-Type': 'application/json' },
       signal: AbortSignal.timeout(3500),
     });
     if (!res.ok) {
-      console.warn(`API [${endpoint}] returned status ${res.status}, using dataset snapshot.`);
       return fallbackData;
     }
     return (await res.json()) as T;
-  } catch (err) {
-    // Graceful fallback to real precomputed dataset figures
+  } catch {
     return fallbackData;
   }
 }

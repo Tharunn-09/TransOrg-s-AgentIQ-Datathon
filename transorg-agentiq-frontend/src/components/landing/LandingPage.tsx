@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import Navbar from './Navbar';
 import HeroSection from './HeroSection';
+import DemoVideoModal from './DemoVideoModal';
 import TrustMarquee from './TrustMarquee';
 import ArchitectureSection from './ArchitectureSection';
 import DatasetsSection from './DatasetsSection';
@@ -11,6 +13,7 @@ import ConversionBanner from './ConversionBanner';
 import Footer from './Footer';
 
 export default function LandingPage({ onSignIn, onLaunch }: { onSignIn: () => void; onLaunch: () => void }) {
+  const [showDemoModal, setShowDemoModal] = useState(false);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -37,7 +40,7 @@ export default function LandingPage({ onSignIn, onLaunch }: { onSignIn: () => vo
         <Navbar onSignIn={onSignIn} onLaunch={onLaunch} />
 
         <main className="space-y-4">
-          <HeroSection onLaunch={onLaunch} />
+          <HeroSection onLaunch={onLaunch} onWatchDemo={() => setShowDemoModal(true)} />
           <TrustMarquee />
           <ArchitectureSection />
           <DatasetsSection />
@@ -51,6 +54,13 @@ export default function LandingPage({ onSignIn, onLaunch }: { onSignIn: () => vo
 
         <Footer />
       </div>
+
+      {/* Interactive Platform Walkthrough Demo Modal */}
+      <DemoVideoModal
+        isOpen={showDemoModal}
+        onClose={() => setShowDemoModal(false)}
+        onLaunch={onLaunch}
+      />
     </div>
   );
 }

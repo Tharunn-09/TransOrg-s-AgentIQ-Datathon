@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Play, Sparkles, ShieldCheck, Activity, Cpu } from 'lucide-react';
 
-export default function HeroSection({ onLaunch }: { onLaunch: () => void }) {
+export default function HeroSection({ onLaunch, onWatchDemo }: { onLaunch: () => void; onWatchDemo?: () => void }) {
   const containerVariants = {
     hidden: { opacity: 0 },
     show: {
@@ -42,40 +42,29 @@ export default function HeroSection({ onLaunch }: { onLaunch: () => void }) {
         variants={containerVariants}
         initial="hidden"
         animate="show"
-        className="relative max-w-5xl mx-auto text-center z-10"
+        className="relative max-w-5xl mx-auto text-center"
       >
-        {/* Eyebrow Pill Badge */}
-        <motion.div variants={itemVariants} className="inline-block mb-7">
-          <div
-            className="eyebrow inline-flex items-center gap-2.5 text-[11px] font-medium px-4 py-1.5 rounded-full shadow-[0_0_20px_rgba(255,200,1,0.15)] transition-all duration-300 hover:scale-105 cursor-default"
-            style={{
-              border: '1px solid rgba(255, 200, 1, 0.35)',
-              background: 'rgba(20, 42, 52, 0.75)',
-              backdropFilter: 'blur(12px)',
-              color: '#FFC801',
-            }}
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-forsythia opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-forsythia" />
+        {/* Release Pill Badge */}
+        <motion.div variants={itemVariants} className="inline-flex items-center gap-2 mb-6">
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-forsythia/30 bg-forsythia/10 backdrop-blur-md shadow-[0_0_20px_rgba(255,200,1,0.15)]">
+            <span className="w-2 h-2 rounded-full bg-forsythia animate-ping" />
+            <Sparkles size={13} className="text-forsythia" />
+            <span className="text-xs font-mono font-medium tracking-wide text-forsythia uppercase">
+              Autonomous Graph AI • UPI Fraud Defense &amp; Merchant Risk
             </span>
-            <Sparkles size={12} strokeWidth={2.5} />
-            <span>Autonomous Graph AI · UPI Fraud Defense &amp; Merchant Risk</span>
           </div>
         </motion.div>
 
-        {/* Main Display Headline */}
+        {/* Master Hero Headline */}
         <motion.h1
           variants={itemVariants}
-          className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-arctic leading-[1.05]"
+          className="text-4xl sm:text-6xl md:text-7xl font-display font-extrabold tracking-tight text-arctic leading-[1.1]"
         >
-          Autonomous AI agents for your{' '}
-          <span className="text-gradient drop-shadow-[0_0_35px_rgba(255,200,1,0.25)]">
-            UPI payment stack
-          </span>
+          Autonomous AI agents for <br />
+          your <span className="gradient-text drop-shadow-sm">UPI payment stack</span>
         </motion.h1>
 
-        {/* Subtitle Description */}
+        {/* Narrative Subtitle */}
         <motion.p
           variants={itemVariants}
           className="mt-7 text-lg sm:text-xl text-mystic/70 max-w-2xl mx-auto leading-relaxed font-normal"
@@ -103,8 +92,8 @@ export default function HeroSection({ onLaunch }: { onLaunch: () => void }) {
           <motion.button
             whileHover={{ scale: 1.02, backgroundColor: 'rgba(255,255,255,0.08)' }}
             whileTap={{ scale: 0.98 }}
-            onClick={onLaunch}
-            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg font-medium text-arctic border border-surface-border bg-white/[0.03] backdrop-blur-sm hover:border-forsythia/40 transition-colors duration-300"
+            onClick={onWatchDemo || onLaunch}
+            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg font-medium text-arctic border border-surface-border bg-white/[0.03] backdrop-blur-sm hover:border-forsythia/40 hover:text-forsythia transition-colors duration-300 shadow-sm cursor-pointer"
           >
             <Play size={14} className="text-forsythia fill-forsythia/30" />
             Watch interactive demo

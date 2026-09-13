@@ -1,0 +1,8 @@
+.env
+.env.local
+*.csv
+*.json
+*.db
+*.ipynb
+tests/
+__pycache__/

@@ -850,6 +850,10 @@ def get_api_keys_status():
                 "status": "ACTIVE" if resend_k else "INACTIVE"
             }
         },
+        "engine": "AgentIQ Autonomous Sentinel v2.4"
+    }
+
+
 # ==========================================
 # 11. SERVE FRONTEND STATIC ASSETS (RENDER / PRODUCTION)
 # ==========================================

@@ -14,8 +14,8 @@ const CARDS = [
   },
   {
     icon: Plug,
-    title: '200+ fintech connectors',
-    body: 'Ingest NPCI UPI switches, core banking logs, and chargeback webhooks natively.',
+    title: '4 Core FinTech Pipelines',
+    body: 'Ingest NPCI UPI transactions, customer KYC profiles, merchant master records, and chargeback webhooks natively.',
   },
   {
     icon: Gauge,

@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 
 const METRICS = [
-  { value: 239.2, prefix: '₹', suffix: 'M+', label: 'Processed volume tracked', decimals: 1, color: 'text-forsythia' },
-  { value: 99.99, prefix: '', suffix: '%', label: 'Platform SLA reliability', decimals: 2, color: 'text-emerald-400' },
-  { value: 12, prefix: 'p99 < ', suffix: 'ms', label: 'Real-time graph traversal latency', decimals: 0, color: 'text-sky-400' },
-  { value: 98.4, prefix: '', suffix: '%', label: 'True-positive syndicate capture', decimals: 1, color: 'text-saffron' },
+  { value: 239.2, prefix: '₹', suffix: 'M', label: 'Cleaned transaction volume (20k txns)', decimals: 1, color: 'text-forsythia' },
+  { value: 85.3, prefix: '', suffix: '%', label: 'Payment gateway success rate', decimals: 1, color: 'text-emerald-400' },
+  { value: 28920, prefix: '', suffix: '', label: 'Customer KYC profiles verified', decimals: 0, color: 'text-sky-400' },
+  { value: 2800, prefix: '', suffix: '', label: 'Disputes resolved & 7d SLA tracked', decimals: 0, color: 'text-saffron' },
 ];
 
 function Counter({ value, decimals, prefix, suffix, colorClass }: { value: number; decimals: number; prefix: string; suffix: string; colorClass: string }) {

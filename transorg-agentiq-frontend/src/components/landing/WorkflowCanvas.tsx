@@ -55,9 +55,9 @@ const WORKFLOW_CONFIGS: WorkflowTabConfig[] = [
   {
     id: 'agents',
     name: 'Agents',
-    count: 49,
+    count: 16,
     agentName: 'Agent: FinTech Fraud & Syndicate Sentinel',
-    agentSub: 'Running · 16 nodes · 20k events/min · p99 12ms',
+    agentSub: 'Running · 16 nodes · 20k events · p99 12ms',
     nodes: [
       {
         id: 'src-upi',
@@ -160,7 +160,7 @@ const WORKFLOW_CONFIGS: WorkflowTabConfig[] = [
   {
     id: 'pipelines',
     name: 'Pipelines',
-    count: 57,
+    count: 4,
     agentName: 'Pipeline: Ingestion, Validation & Metrics Engine',
     agentSub: 'Active · 4 Datasets Cleaned · SQL Schema Ready · SQLite & DuckDB',
     nodes: [
@@ -172,7 +172,7 @@ const WORKFLOW_CONFIGS: WorkflowTabConfig[] = [
         y: 70,
         width: 170,
         description: '20k transaction records with timestamps, amounts, statuses, and UPI switches.',
-        metric: '₹7.64 Cr Volume'
+        metric: '₹23.92 Cr Volume'
       },
       {
         id: 'p-kyc',
@@ -228,7 +228,7 @@ const WORKFLOW_CONFIGS: WorkflowTabConfig[] = [
   {
     id: 'datasets',
     name: 'Datasets',
-    count: 62,
+    count: 4,
     agentName: 'Dataset Mesh: 4 Cleaned & Unified Tables',
     agentSub: 'Integrated · Transactions · Customers · Merchants · Chargebacks',
     nodes: [
@@ -296,7 +296,7 @@ const WORKFLOW_CONFIGS: WorkflowTabConfig[] = [
   {
     id: 'triggers',
     name: 'Triggers',
-    count: 59,
+    count: 7,
     agentName: 'Trigger: Automated Policy Enforcement',
     agentSub: 'Autonomous · SLA Breaches · Spike Bursts · Syndicate Flags',
     nodes: [
@@ -364,7 +364,7 @@ const WORKFLOW_CONFIGS: WorkflowTabConfig[] = [
   {
     id: 'observability',
     name: 'Observability',
-    count: 31,
+    count: 9,
     agentName: 'Observability: Tamper-Evident Audit & Telemetry',
     agentSub: 'Immutable Logging · Sha256 Audit Trail · User Auth · MFA Verified',
     nodes: [
@@ -432,7 +432,7 @@ const WORKFLOW_CONFIGS: WorkflowTabConfig[] = [
   {
     id: 'models',
     name: 'Models',
-    count: 62,
+    count: 4,
     agentName: 'AI Model Mesh: Isolation Forest · K-Means · NetworkX · Gemini',
     agentSub: 'Multi-Model Pipeline · Unsupervised Anomaly Detection · GenAI Reasoning',
     nodes: [

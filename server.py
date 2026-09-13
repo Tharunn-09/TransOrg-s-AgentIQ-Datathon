@@ -82,6 +82,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+@app.get("/healthz")
+@app.get("/api/health")
+def health_check():
+    """Health check endpoint for Render and uptime monitoring."""
+    return {"status": "healthy", "service": "AgentIQ Analytics Backend", "version": "2.4.0"}
+
+
 # Load data into memory for high-speed API responses
 db_file = "upi_fraud_analytics.db"
 if not os.path.exists(db_file):

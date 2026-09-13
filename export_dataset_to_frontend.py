@@ -82,13 +82,13 @@ cb_by_mch = df_cb.groupby('merchant_id').agg(
     disputed_amount=('disputed_amount_clean', 'sum')
 ).reset_index()
 mch_dispute_merged = cb_by_mch.merge(df_merchants[['merchant_id', 'merchant_name_clean']], on='merchant_id', how='left')
-mch_dispute_merged['merchant_name'] = mch_dispute_merged['merchant_name_clean']
+mch_dispute_merged['merchant_name'] = mch_dispute_merged['merchant_name_clean'].fillna(mch_dispute_merged['merchant_id'])
 top_dispute_merchants = mch_dispute_merged.sort_values(by='dispute_count', ascending=False).head(10)[['merchant_id', 'merchant_name', 'dispute_count', 'disputed_amount']].to_dict(orient='records')
 
 # Spikes
 spike_df = detect_merchant_spikes_isolation_forest(df_tx, df_cb)
 spike_df_clean = spike_df.merge(df_merchants[['merchant_id', 'merchant_name_clean']], on='merchant_id', how='left')
-spike_df_clean['merchant_name'] = spike_df_clean['merchant_name_clean']
+spike_df_clean['merchant_name'] = spike_df_clean['merchant_name_clean'].fillna(spike_df_clean['merchant_id'])
 spike_records = spike_df_clean.head(100)[[
     'merchant_id', 'merchant_name', 'max_daily_tx', 'tx_spike_ratio', 'max_daily_vol', 'vol_spike_ratio', 'dispute_count', 'is_spike_anomaly', 'anomaly_score'
 ]].copy()

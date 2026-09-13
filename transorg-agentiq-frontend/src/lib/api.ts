@@ -4,20 +4,17 @@ const isCloudHosted = typeof window !== 'undefined' && window.location.hostname 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (isCloudHosted ? '' : 'http://localhost:8000');
 
 async function fetchWithFallback<T>(endpoint: string, fallbackData: T): Promise<T> {
-  // In cloud environment without custom backend URL, immediately serve the real dataset snapshot
-  if (isCloudHosted && !import.meta.env.VITE_API_BASE_URL) {
-    return fallbackData;
-  }
-
   try {
-    const res = await fetch(`${API_BASE_URL}${endpoint}`, {
+    const url = `${API_BASE_URL}${endpoint}`;
+    const res = await fetch(url, {
       headers: { 'Content-Type': 'application/json' },
-      signal: AbortSignal.timeout(3500),
+      signal: AbortSignal.timeout(6000),
     });
     if (!res.ok) {
       return fallbackData;
     }
-    return (await res.json()) as T;
+    const data = await res.json();
+    return data as T;
   } catch {
     return fallbackData;
   }

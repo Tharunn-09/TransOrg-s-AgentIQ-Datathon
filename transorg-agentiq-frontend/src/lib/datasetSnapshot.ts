@@ -2585,7 +2585,7 @@ export const REAL_DATASET_SNAPSHOT = {
   "top_dispute_merchants": [
     {
       "merchant_id": "MCH4473",
-      "merchant_name": NaN,
+      "merchant_name": "MCH4473",
       "dispute_count": 48,
       "disputed_amount": 117918.92
     },
@@ -2603,19 +2603,19 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH2822",
-      "merchant_name": NaN,
+      "merchant_name": "MCH2822",
       "dispute_count": 33,
       "disputed_amount": 83776.23
     },
     {
       "merchant_id": "MCH4181",
-      "merchant_name": NaN,
+      "merchant_name": "MCH4181",
       "dispute_count": 32,
       "disputed_amount": 88486.13
     },
     {
       "merchant_id": "MCH5076",
-      "merchant_name": NaN,
+      "merchant_name": "MCH5076",
       "dispute_count": 30,
       "disputed_amount": 96715.22
     },
@@ -2627,13 +2627,13 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH6810",
-      "merchant_name": NaN,
+      "merchant_name": "MCH6810",
       "dispute_count": 29,
       "disputed_amount": 49847.15
     },
     {
       "merchant_id": "MCH5655",
-      "merchant_name": NaN,
+      "merchant_name": "MCH5655",
       "dispute_count": 29,
       "disputed_amount": 68004.93000000001
     },
@@ -2683,7 +2683,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH7874",
-      "merchant_name": NaN,
+      "merchant_name": "MCH7874",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.6666666666666667,
       "max_daily_vol": 33202.29,
@@ -2695,7 +2695,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH1113",
-      "merchant_name": NaN,
+      "merchant_name": "MCH1113",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.7142857142857142,
       "max_daily_vol": 41518.31,
@@ -2731,7 +2731,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH4130",
-      "merchant_name": NaN,
+      "merchant_name": "MCH4130",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.3333333333333333,
       "max_daily_vol": 38386.22,
@@ -2755,7 +2755,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH3791",
-      "merchant_name": NaN,
+      "merchant_name": "MCH3791",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.6666666666666667,
       "max_daily_vol": 21761.43,
@@ -2779,7 +2779,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH5289",
-      "merchant_name": NaN,
+      "merchant_name": "MCH5289",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.7142857142857142,
       "max_daily_vol": 38604.74,
@@ -2791,7 +2791,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH1741",
-      "merchant_name": NaN,
+      "merchant_name": "MCH1741",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.3333333333333333,
       "max_daily_vol": 4708.74,
@@ -2803,7 +2803,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH5578",
-      "merchant_name": NaN,
+      "merchant_name": "MCH5578",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.6666666666666667,
       "max_daily_vol": 29915.660000000003,
@@ -2815,7 +2815,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH1368",
-      "merchant_name": NaN,
+      "merchant_name": "MCH1368",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.6,
       "max_daily_vol": 40991.259999999995,
@@ -2827,7 +2827,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH9970",
-      "merchant_name": NaN,
+      "merchant_name": "MCH9970",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.6,
       "max_daily_vol": 38163.39,
@@ -2839,7 +2839,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH2393",
-      "merchant_name": NaN,
+      "merchant_name": "MCH2393",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.6,
       "max_daily_vol": 40096.71,
@@ -2851,7 +2851,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH5600",
-      "merchant_name": NaN,
+      "merchant_name": "MCH5600",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.6666666666666667,
       "max_daily_vol": 21117.120000000003,
@@ -2863,7 +2863,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH5839",
-      "merchant_name": NaN,
+      "merchant_name": "MCH5839",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.6,
       "max_daily_vol": 20433.31,
@@ -2875,7 +2875,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH6613",
-      "merchant_name": NaN,
+      "merchant_name": "MCH6613",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.7999999999999998,
       "max_daily_vol": 28388.72,
@@ -2887,7 +2887,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH4921",
-      "merchant_name": NaN,
+      "merchant_name": "MCH4921",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.6666666666666667,
       "max_daily_vol": 37720.72,
@@ -2899,7 +2899,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH7785",
-      "merchant_name": NaN,
+      "merchant_name": "MCH7785",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.6,
       "max_daily_vol": 26828.94,
@@ -2911,7 +2911,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH7889",
-      "merchant_name": NaN,
+      "merchant_name": "MCH7889",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.6666666666666667,
       "max_daily_vol": 32438.99,
@@ -2923,7 +2923,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH9115",
-      "merchant_name": NaN,
+      "merchant_name": "MCH9115",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.4285714285714286,
       "max_daily_vol": 39029.979999999996,
@@ -2971,7 +2971,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH1513",
-      "merchant_name": NaN,
+      "merchant_name": "MCH1513",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.5,
       "max_daily_vol": 47892.44,
@@ -2995,7 +2995,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH1173",
-      "merchant_name": NaN,
+      "merchant_name": "MCH1173",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.6,
       "max_daily_vol": 32723.76,
@@ -3007,7 +3007,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH6074",
-      "merchant_name": NaN,
+      "merchant_name": "MCH6074",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.6,
       "max_daily_vol": 28529.57,
@@ -3019,7 +3019,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH7134",
-      "merchant_name": NaN,
+      "merchant_name": "MCH7134",
       "max_daily_tx": 1,
       "tx_spike_ratio": 1.0,
       "max_daily_vol": 4859.41,
@@ -3031,7 +3031,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH6456",
-      "merchant_name": NaN,
+      "merchant_name": "MCH6456",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.5,
       "max_daily_vol": 48006.93,
@@ -3055,7 +3055,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH9812",
-      "merchant_name": NaN,
+      "merchant_name": "MCH9812",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.5,
       "max_daily_vol": 44247.35,
@@ -3067,7 +3067,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH5142",
-      "merchant_name": NaN,
+      "merchant_name": "MCH5142",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.6,
       "max_daily_vol": 36726.51,
@@ -3079,7 +3079,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH4671",
-      "merchant_name": NaN,
+      "merchant_name": "MCH4671",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.5,
       "max_daily_vol": 12354.74,
@@ -3115,7 +3115,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH3352",
-      "merchant_name": NaN,
+      "merchant_name": "MCH3352",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.7142857142857142,
       "max_daily_vol": 29575.559999999998,
@@ -3139,7 +3139,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH8699",
-      "merchant_name": NaN,
+      "merchant_name": "MCH8699",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.6666666666666667,
       "max_daily_vol": 32730.55,
@@ -3151,7 +3151,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH8081",
-      "merchant_name": NaN,
+      "merchant_name": "MCH8081",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.75,
       "max_daily_vol": 29987.03,
@@ -3163,7 +3163,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH3381",
-      "merchant_name": NaN,
+      "merchant_name": "MCH3381",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.6,
       "max_daily_vol": 24999.960000000003,
@@ -3175,7 +3175,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH9499",
-      "merchant_name": NaN,
+      "merchant_name": "MCH9499",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.5,
       "max_daily_vol": 43356.11,
@@ -3199,7 +3199,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH1176",
-      "merchant_name": NaN,
+      "merchant_name": "MCH1176",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.5,
       "max_daily_vol": 37616.12,
@@ -3211,7 +3211,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH7559",
-      "merchant_name": NaN,
+      "merchant_name": "MCH7559",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.6,
       "max_daily_vol": 23110.48,
@@ -3259,7 +3259,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH8877",
-      "merchant_name": NaN,
+      "merchant_name": "MCH8877",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.3333333333333333,
       "max_daily_vol": 43272.09,
@@ -3331,7 +3331,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH6688",
-      "merchant_name": NaN,
+      "merchant_name": "MCH6688",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.3333333333333333,
       "max_daily_vol": 39049.270000000004,
@@ -3355,7 +3355,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH5971",
-      "merchant_name": NaN,
+      "merchant_name": "MCH5971",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.6666666666666667,
       "max_daily_vol": 22878.1,
@@ -3379,7 +3379,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH5922",
-      "merchant_name": NaN,
+      "merchant_name": "MCH5922",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.6666666666666667,
       "max_daily_vol": 24746.79,
@@ -3403,7 +3403,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH5195",
-      "merchant_name": NaN,
+      "merchant_name": "MCH5195",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.6,
       "max_daily_vol": 25007.85,
@@ -3415,7 +3415,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH7518",
-      "merchant_name": NaN,
+      "merchant_name": "MCH7518",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.6,
       "max_daily_vol": 32506.74,
@@ -3427,7 +3427,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH5466",
-      "merchant_name": NaN,
+      "merchant_name": "MCH5466",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.6666666666666667,
       "max_daily_vol": 24509.41,
@@ -3439,7 +3439,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH1302",
-      "merchant_name": NaN,
+      "merchant_name": "MCH1302",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.5,
       "max_daily_vol": 37740.259999999995,
@@ -3475,7 +3475,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH4473",
-      "merchant_name": NaN,
+      "merchant_name": "MCH4473",
       "max_daily_tx": 1,
       "tx_spike_ratio": 1.0,
       "max_daily_vol": 12685.8,
@@ -3487,7 +3487,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH5769",
-      "merchant_name": NaN,
+      "merchant_name": "MCH5769",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.6,
       "max_daily_vol": 18463.92,
@@ -3523,7 +3523,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH1489",
-      "merchant_name": NaN,
+      "merchant_name": "MCH1489",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.6,
       "max_daily_vol": 22945.71,
@@ -3535,7 +3535,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH7777",
-      "merchant_name": NaN,
+      "merchant_name": "MCH7777",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.6,
       "max_daily_vol": 19423.74,
@@ -3547,7 +3547,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH3302",
-      "merchant_name": NaN,
+      "merchant_name": "MCH3302",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.6,
       "max_daily_vol": 31597.29,
@@ -3559,7 +3559,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH5655",
-      "merchant_name": NaN,
+      "merchant_name": "MCH5655",
       "max_daily_tx": 1,
       "tx_spike_ratio": 1.0,
       "max_daily_vol": 4198.8,
@@ -3595,7 +3595,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH6810",
-      "merchant_name": NaN,
+      "merchant_name": "MCH6810",
       "max_daily_tx": 1,
       "tx_spike_ratio": 1.0,
       "max_daily_vol": 24783.0,
@@ -3607,7 +3607,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH7304",
-      "merchant_name": NaN,
+      "merchant_name": "MCH7304",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.6666666666666667,
       "max_daily_vol": 21925.95,
@@ -3679,7 +3679,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH8930",
-      "merchant_name": NaN,
+      "merchant_name": "MCH8930",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.3333333333333333,
       "max_daily_vol": 35366.57,
@@ -3691,7 +3691,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH2176",
-      "merchant_name": NaN,
+      "merchant_name": "MCH2176",
       "max_daily_tx": 1,
       "tx_spike_ratio": 1.0,
       "max_daily_vol": 15217.0,
@@ -3715,7 +3715,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH5214",
-      "merchant_name": NaN,
+      "merchant_name": "MCH5214",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.6666666666666667,
       "max_daily_vol": 20496.84,
@@ -3739,7 +3739,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH5761",
-      "merchant_name": NaN,
+      "merchant_name": "MCH5761",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.6666666666666667,
       "max_daily_vol": 22661.87,
@@ -3751,7 +3751,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH6787",
-      "merchant_name": NaN,
+      "merchant_name": "MCH6787",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.6666666666666667,
       "max_daily_vol": 20523.0,
@@ -3763,7 +3763,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH6081",
-      "merchant_name": NaN,
+      "merchant_name": "MCH6081",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.5,
       "max_daily_vol": 23555.2,
@@ -3787,7 +3787,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH1432",
-      "merchant_name": NaN,
+      "merchant_name": "MCH1432",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.6,
       "max_daily_vol": 22315.03,
@@ -3799,7 +3799,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH7998",
-      "merchant_name": NaN,
+      "merchant_name": "MCH7998",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.5,
       "max_daily_vol": 13082.779999999999,
@@ -3811,7 +3811,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH8742",
-      "merchant_name": NaN,
+      "merchant_name": "MCH8742",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.3333333333333333,
       "max_daily_vol": 27226.82,
@@ -3823,7 +3823,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH1116",
-      "merchant_name": NaN,
+      "merchant_name": "MCH1116",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.6,
       "max_daily_vol": 21173.280000000002,
@@ -3835,7 +3835,7 @@ export const REAL_DATASET_SNAPSHOT = {
     },
     {
       "merchant_id": "MCH7207",
-      "merchant_name": NaN,
+      "merchant_name": "MCH7207",
       "max_daily_tx": 2,
       "tx_spike_ratio": 1.5,
       "max_daily_vol": 24148.81,
@@ -5683,7 +5683,7 @@ export const REAL_DATASET_SNAPSHOT = {
       "color": "#FF9932",
       "points": [
         {
-          "x": 19.9,
+          "x": 21.3,
           "y": 45.0
         },
         {
@@ -5739,11 +5739,11 @@ export const REAL_DATASET_SNAPSHOT = {
           "y": 20.0
         },
         {
-          "x": 18.1,
+          "x": 20.1,
           "y": 29.1
         },
         {
-          "x": 20.7,
+          "x": 20.8,
           "y": 20.0
         },
         {
@@ -5755,7 +5755,7 @@ export const REAL_DATASET_SNAPSHOT = {
           "y": 38.2
         },
         {
-          "x": 18.5,
+          "x": 21.5,
           "y": 20.0
         },
         {
@@ -5791,7 +5791,7 @@ export const REAL_DATASET_SNAPSHOT = {
           "y": 19.2
         },
         {
-          "x": 19.7,
+          "x": 22.2,
           "y": 19.2
         },
         {
@@ -5799,7 +5799,7 @@ export const REAL_DATASET_SNAPSHOT = {
           "y": 19.2
         },
         {
-          "x": 22.2,
+          "x": 17.0,
           "y": 28.3
         }
       ]
@@ -5813,11 +5813,11 @@ export const REAL_DATASET_SNAPSHOT = {
           "y": 69.5
         },
         {
-          "x": 18.2,
+          "x": 20.1,
           "y": 100
         },
         {
-          "x": 21.2,
+          "x": 20.7,
           "y": 30.3
         },
         {
@@ -5849,7 +5849,7 @@ export const REAL_DATASET_SNAPSHOT = {
           "y": 27.1
         },
         {
-          "x": 23.0,
+          "x": 19.0,
           "y": 27.1
         },
         {
@@ -5865,7 +5865,7 @@ export const REAL_DATASET_SNAPSHOT = {
           "y": 72.5
         },
         {
-          "x": 17.5,
+          "x": 17.4,
           "y": 81.6
         },
         {
@@ -5889,7 +5889,7 @@ export const REAL_DATASET_SNAPSHOT = {
           "y": 26.3
         },
         {
-          "x": 20.2,
+          "x": 21.4,
           "y": 79.6
         },
         {
@@ -5897,7 +5897,7 @@ export const REAL_DATASET_SNAPSHOT = {
           "y": 34.2
         },
         {
-          "x": 21.6,
+          "x": 18.6,
           "y": 16.0
         },
         {
@@ -5935,123 +5935,123 @@ export const REAL_DATASET_SNAPSHOT = {
       "color": "#9BAEAF",
       "points": [
         {
-          "x": 59.7,
+          "x": 61.5,
           "y": 100
         },
         {
-          "x": 40.1,
+          "x": 40.3,
           "y": 18.0
         },
         {
-          "x": 37.9,
+          "x": 40.6,
           "y": 18.0
         },
         {
-          "x": 41.9,
+          "x": 40.7,
           "y": 54.4
         },
         {
-          "x": 19.6,
+          "x": 18.0,
           "y": 35.4
         },
         {
-          "x": 42.1,
+          "x": 40.2,
           "y": 17.2
         },
         {
-          "x": 19.5,
+          "x": 19.0,
           "y": 26.3
         },
         {
-          "x": 18.8,
+          "x": 22.1,
           "y": 25.1
-        },
-        {
-          "x": 20.1,
-          "y": 61.5
-        },
-        {
-          "x": 38.1,
-          "y": 16.0
-        },
-        {
-          "x": 37.7,
-          "y": 16.0
-        },
-        {
-          "x": 61.5,
-          "y": 43.3
-        },
-        {
-          "x": 42.5,
-          "y": 16.0
-        },
-        {
-          "x": 20.7,
-          "y": 25.1
-        },
-        {
-          "x": 38.5,
-          "y": 16.0
-        },
-        {
-          "x": 18.9,
-          "y": 24.3
-        },
-        {
-          "x": 22.6,
-          "y": 15.2
-        },
-        {
-          "x": 20.5,
-          "y": 15.2
-        },
-        {
-          "x": 41.3,
-          "y": 24.3
-        },
-        {
-          "x": 22.0,
-          "y": 24.3
-        },
-        {
-          "x": 21.6,
-          "y": 15.2
-        },
-        {
-          "x": 22.7,
-          "y": 23.9
-        },
-        {
-          "x": 39.2,
-          "y": 14.0
-        },
-        {
-          "x": 20.7,
-          "y": 14.0
-        },
-        {
-          "x": 21.6,
-          "y": 23.1
-        },
-        {
-          "x": 39.4,
-          "y": 14.0
         },
         {
           "x": 19.3,
+          "y": 61.5
+        },
+        {
+          "x": 37.1,
+          "y": 16.0
+        },
+        {
+          "x": 37.9,
+          "y": 16.0
+        },
+        {
+          "x": 59.4,
+          "y": 43.3
+        },
+        {
+          "x": 37.5,
+          "y": 16.0
+        },
+        {
+          "x": 20.2,
+          "y": 25.1
+        },
+        {
+          "x": 37.8,
+          "y": 16.0
+        },
+        {
+          "x": 18.6,
+          "y": 24.3
+        },
+        {
+          "x": 17.1,
+          "y": 15.2
+        },
+        {
+          "x": 22.2,
+          "y": 15.2
+        },
+        {
+          "x": 41.0,
+          "y": 24.3
+        },
+        {
+          "x": 17.5,
+          "y": 24.3
+        },
+        {
+          "x": 18.3,
+          "y": 15.2
+        },
+        {
+          "x": 21.1,
+          "y": 23.9
+        },
+        {
+          "x": 38.1,
           "y": 14.0
         },
         {
-          "x": 18.4,
+          "x": 22.9,
           "y": 14.0
         },
         {
-          "x": 42.0,
+          "x": 22.9,
+          "y": 23.1
+        },
+        {
+          "x": 41.3,
           "y": 14.0
         },
         {
-          "x": 43.0,
+          "x": 22.8,
+          "y": 14.0
+        },
+        {
+          "x": 20.3,
+          "y": 14.0
+        },
+        {
+          "x": 37.3,
+          "y": 14.0
+        },
+        {
+          "x": 42.6,
           "y": 23.1
         }
       ]
@@ -6569,7 +6569,7 @@ export const REAL_DATASET_SNAPSHOT = {
     {
       "ring_id": "RING-01",
       "members": 2,
-      "hub_merchant": "MCH5076, MCH4473",
+      "hub_merchant": "MCH4473, MCH5076",
       "total_volume": 1500000,
       "pagerank_max": 0.95
     }

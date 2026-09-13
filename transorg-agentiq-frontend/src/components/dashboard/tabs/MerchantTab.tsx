@@ -116,6 +116,13 @@ export default function MerchantTab() {
     [highRiskMerchants, query, categoryFilter]
   );
 
+  const normalizedTopDisputes = useMemo(() => {
+    return (topDisputes || []).map((d: any) => ({
+      ...d,
+      merchant_name: d.merchant_name || d.merchant_name_clean || d.merchant_id || 'Unknown',
+    }));
+  }, [topDisputes]);
+
   const columns: Column<MerchantRow>[] = [
     {
       key: 'name',
@@ -165,7 +172,7 @@ export default function MerchantTab() {
         );
       },
     },
-    { key: 'category', header: 'Category', render: (r) => <span className="text-mystic/80">{r.category}</span> },
+    { key: 'category', header: 'Category', render: (r) => <span className="text-xs text-mystic/70">{r.category}</span> },
     {
       key: 'tx_count',
       header: 'Txns / Disputes',
@@ -185,7 +192,7 @@ export default function MerchantTab() {
       <div className="grid lg:grid-cols-2 gap-5">
         <ChartCard title="Top 10 merchants by dispute count" subtitle="Chargebacks aggregated directly from chargeback records">
           <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={topDisputes} layout="vertical" margin={{ left: 10, right: 15 }}>
+            <BarChart data={normalizedTopDisputes} layout="vertical" margin={{ left: 10, right: 15 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" horizontal={false} />
               <XAxis type="number" tick={{ fill: '#9BAEAF', fontSize: 11 }} axisLine={false} tickLine={false} />
               <YAxis

@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "buildCommand": "npm --prefix transorg-agentiq-frontend install && npm --prefix transorg-agentiq-frontend run build",
+  "outputDirectory": "transorg-agentiq-frontend/dist",
+  "framework": "vite",
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/index.py"
+    },
+    {
+      "source": "/assets/(.*)",
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

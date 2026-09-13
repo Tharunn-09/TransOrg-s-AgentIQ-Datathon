@@ -1,0 +1,9 @@
+{
+  "name": "agentiq-platform",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "npm --prefix transorg-agentiq-frontend install && npm --prefix transorg-agentiq-frontend run build",
+    "dev": "npm --prefix transorg-agentiq-frontend run dev"
+  }
+}

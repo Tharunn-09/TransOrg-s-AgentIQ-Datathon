@@ -1,0 +1,33 @@
+# Core Analytics & Data Processing
+pandas>=2.2.0
+numpy>=1.26.0
+python-dateutil>=2.9.0
+
+# REST API Server
+fastapi>=0.110.0
+uvicorn>=0.28.0
+pydantic>=2.6.0
+python-dotenv>=1.0.0
+
+# Machine Learning & Graph Analysis
+scikit-learn>=1.4.0
+networkx>=3.2.0
+scipy>=1.12.0
+
+# Data Visualization & Charting
+plotly>=5.20.0
+matplotlib>=3.8.0
+
+# Multi-LLM Engine Support
+groq>=0.15.0
+google-generativeai>=0.8.0
+openai>=1.50.0
+
+# Authentication & Security
+pyotp>=2.9.0
+qrcode>=7.4.0
+pillow>=10.0.0
+
+# Reporting & Exports
+fpdf2>=2.7.0
+reportlab>=4.0.0

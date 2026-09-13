@@ -1,8 +1,14 @@
 .env
 .env.local
-*.csv
-*.json
+requirements.txt
+server.py
+pipeline.py
+export_dataset_to_frontend.py
+src/
+tests/
+track1_*.csv
+track1_*.json
+track1_*.txt
 *.db
 *.ipynb
-tests/
 __pycache__/

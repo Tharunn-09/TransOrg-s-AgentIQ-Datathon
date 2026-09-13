@@ -5,18 +5,15 @@
 
 ---
 
-## 🎬 Live Platform Demo Walkthrough
+## 🎬 Interactive Platform Demo Walkthrough
 
 <p align="center">
-  <video src="./assets/demo_walkthrough.mp4" controls="controls" autoplay="autoplay" muted="muted" loop="loop" width="100%" style="border-radius: 12px; max-width: 1000px; box-shadow: 0 8px 32px rgba(0,0,0,0.3);">
-    <source src="./assets/demo_walkthrough.mp4" type="video/mp4" />
-    <a href="./assets/demo_walkthrough.mp4">▶ Click here to play / download the demo video (assets/demo_walkthrough.mp4)</a>
-  </video>
+  <img src="docs/images/agentiq_demo.webp" alt="AgentIQ Interactive Demo" width="100%" style="border-radius: 12px; max-width: 1000px; box-shadow: 0 8px 32px rgba(0,0,0,0.3);" />
 </p>
 
 <p align="center">
   <a href="./assets/demo_walkthrough.mp4">
-    <img src="https://img.shields.io/badge/▶_Play_HD_Demo_Video-assets%2Fdemo__walkthrough.mp4-FFC801?style=for-the-badge&logo=youtube&logoColor=10232B" alt="Play HD Video" />
+    <img src="https://img.shields.io/badge/▶_Download_Full_HD_MP4_Video-assets%2Fdemo__walkthrough.mp4-FFC801?style=for-the-badge&logo=youtube&logoColor=10232B" alt="Download HD Video" />
   </a>
 </p>
 

@@ -559,6 +559,7 @@ def ask_agent(req: QueryRequest):
         action_type="AGENTIC_AI_QUERY",
         details=f"Prompt: {req.query} | Format: {req.chart_override or 'Auto'}"
     )
+    res = agent.process_query(req.query, chart_override=req.chart_override)
     fig_json = None
     if "figure" in res and res["figure"] is not None:
         try:

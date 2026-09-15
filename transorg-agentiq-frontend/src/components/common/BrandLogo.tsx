@@ -128,14 +128,6 @@ export default function BrandLogo({ variant = 'full', size = 'md', className = '
         </div>
       </div>
 
-      {/* Datathon Badge */}
-      <div className="hidden lg:flex items-center gap-1.5 ml-2 pl-3 border-l border-surface-border text-[10px] font-mono text-forsythia bg-forsythia/10 px-2 py-0.5 rounded-full border border-forsythia/20">
-        <span className="relative flex h-1.5 w-1.5">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-forsythia opacity-75" />
-          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-forsythia" />
-        </span>
-        AGENTIQ MESH v2.4
-      </div>
     </div>
   );
 }

@@ -28,7 +28,7 @@ export default function ComplianceTab() {
   );
   const [sar, setSar] = useState<string | null>(null);
   const [sarLoading, setSarLoading] = useState(false);
-  
+
   // Threat Sentinel State
   const [thresholdRatio, setThresholdRatio] = useState(2.0);
   const [userThreshold, setUserThreshold] = useState(3);

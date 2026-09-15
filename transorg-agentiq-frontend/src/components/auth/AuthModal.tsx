@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { X, Shield, Search, Scale, Copy, Check, Zap, ArrowLeft, Loader2 } from 'lucide-react';
-import FauxQrCode from './FauxQrCode';
 import CountdownRing from './CountdownRing';
 import BrandLogo from '../common/BrandLogo';
 import type { SessionUser } from '../../lib/useAppState';
@@ -13,8 +12,13 @@ const ROLE_PICKS: { role: SessionUser['role']; label: string; icon: typeof Shiel
   { role: 'auditor', label: 'Datathon Auditor', icon: Scale, username: 'auditor' },
 ];
 
+const ROLE_SECRETS: Record<string, string> = {
+  executive: 'JBSWY3DPEHPK3PXP',
+  analyst: 'KRSXG5CTMVRXEZLU',
+  auditor: 'MZXW633PN5XW6MZA',
+};
+
 const DEFAULT_DEMO_PASSCODE = '492018';
-const SECRET_KEY = 'JBSWY3DPEHPK3PXP';
 
 export default function AuthModal({
   open,
@@ -26,8 +30,8 @@ export default function AuthModal({
   onComplete: (user: SessionUser) => void;
 }) {
   const [step, setStep] = useState<1 | 2>(1);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('analyst');
+  const [password, setPassword] = useState('Password123!');
   const [copied, setCopied] = useState(false);
   const [digits, setDigits] = useState<string[]>(Array(6).fill(''));
   const [error, setError] = useState('');
@@ -36,11 +40,15 @@ export default function AuthModal({
   const [demoTotp, setDemoTotp] = useState<string>(DEFAULT_DEMO_PASSCODE);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
+  const activeSecret = ROLE_SECRETS[username.toLowerCase()] || ROLE_SECRETS.analyst;
+  const otpAuthUri = `otpauth://totp/TransOrg%20AgentIQ:${encodeURIComponent(username || 'analyst')}@transorg.ai?secret=${activeSecret}&issuer=TransOrg%20AgentIQ`;
+  const fallbackQrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&margin=8&data=${encodeURIComponent(otpAuthUri)}`;
+
   useEffect(() => {
     if (!open) {
       setStep(1);
-      setUsername('');
-      setPassword('');
+      setUsername('analyst');
+      setPassword('Password123!');
       setDigits(Array(6).fill(''));
       setError('');
       setCopied(false);
@@ -55,6 +63,7 @@ export default function AuthModal({
   const pickRole = (r: (typeof ROLE_PICKS)[number]) => {
     setUsername(r.username);
     setPassword('Password123!');
+    setError('');
   };
 
   const submitCredentials = async (e: React.FormEvent) => {
@@ -113,7 +122,7 @@ export default function AuthModal({
 
   const copyKey = async () => {
     try {
-      await navigator.clipboard.writeText(SECRET_KEY);
+      await navigator.clipboard.writeText(activeSecret);
       setCopied(true);
       setTimeout(() => setCopied(false), 1600);
     } catch {
@@ -170,15 +179,16 @@ export default function AuthModal({
             <X size={18} />
           </button>
 
-          <div className="mb-5 pb-4 border-b border-surface-border">
+          <div className="mb-5 pb-4 border-b border-surface-border flex justify-center">
             <BrandLogo variant="full" size="sm" />
           </div>
 
           {step === 1 ? (
             <>
-              <p className="eyebrow text-[11px] text-forsythia mb-2">Step 1 of 2 · Credential Verification</p>
-              <h2 className="text-2xl text-arctic mb-1 font-display">Sign in to Command Center</h2>
-              <p className="text-sm text-mystic/55 mb-6">Pick an evaluator role or enter credentials manually.</p>
+              <div className="text-center mb-5">
+                <h2 className="text-2xl text-arctic mb-1 font-display">Sign in to Command Center</h2>
+                <p className="text-sm text-mystic/55">Pick an evaluator role or enter credentials manually.</p>
+              </div>
 
               <div className="grid grid-cols-3 gap-2 mb-6">
                 {ROLE_PICKS.map((r) => (
@@ -217,7 +227,7 @@ export default function AuthModal({
                     className="w-full bg-white/[0.04] border border-surface-border rounded-md px-3.5 py-2.5 text-sm text-arctic placeholder:text-mystic/30 focus:border-forsythia/50 outline-none transition-colors"
                   />
                 </div>
-                {error && <p className="text-xs text-saffron">{error}</p>}
+                {error && <p className="text-xs text-saffron text-center">{error}</p>}
                 <button
                   type="submit"
                   disabled={loading}
@@ -235,38 +245,40 @@ export default function AuthModal({
               >
                 <ArrowLeft size={13} /> Back
               </button>
-              <p className="eyebrow text-[11px] text-forsythia mb-2">Step 2 of 2 · TOTP Multi-Factor Authentication</p>
-              <h2 className="text-2xl text-arctic mb-1 font-display">Verify with Authenticator</h2>
-              <p className="text-sm text-mystic/55 mb-6">
-                Scan with Google Authenticator, Microsoft Authenticator, or Authy.
-              </p>
+              <div className="text-center mb-4">
+                <h2 className="text-2xl text-arctic mb-1 font-display">Verify with Authenticator</h2>
+                <p className="text-xs text-mystic/55">
+                  Scan with Microsoft Authenticator, Google Authenticator, or Authy.
+                </p>
+              </div>
 
-              <div className="flex gap-5 items-center mb-6">
-                {qrCodeBase64 ? (
+              {/* Scannable Real QR Code Container */}
+              <div className="flex gap-4 items-center mb-5 bg-white/[0.03] p-3 rounded-xl border border-surface-border">
+                <div className="bg-white p-1.5 rounded-lg shrink-0 shadow-md">
                   <img
-                    src={`data:image/png;base64,${qrCodeBase64}`}
-                    alt="MFA QR Code"
-                    className="w-24 h-24 rounded-lg border border-forsythia/40 shadow-glow"
+                    src={qrCodeBase64 ? `data:image/png;base64,${qrCodeBase64}` : fallbackQrUrl}
+                    alt="Authenticator TOTP QR Code"
+                    className="w-28 h-28 object-contain rounded"
                   />
-                ) : (
-                  <FauxQrCode seed={SECRET_KEY} size={96} />
-                )}
+                </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-[11px] mono text-mystic/50 mb-1.5">SECRET KEY</p>
+                  <p className="text-[10px] mono text-mystic/60 mb-1 font-semibold uppercase">SECRET KEY</p>
                   <button
+                    type="button"
                     onClick={copyKey}
-                    className="w-full flex items-center justify-between gap-2 bg-white/[0.04] border border-surface-border rounded-md px-3 py-2 mono text-xs text-arctic hover:border-forsythia/40 transition-colors"
+                    className="w-full flex items-center justify-between gap-1.5 bg-[#10232B] border border-white/15 rounded-md px-2.5 py-1.5 mono text-xs text-arctic hover:border-forsythia/50 transition-colors"
+                    title="Click to copy manual entry key"
                   >
-                    <span className="truncate">{SECRET_KEY}</span>
+                    <span className="truncate">{activeSecret}</span>
                     {copied ? <Check size={13} className="text-forsythia flex-shrink-0" /> : <Copy size={13} className="text-mystic/50 flex-shrink-0" />}
                   </button>
-                  <p className="text-[11px] text-mystic/40 mt-1.5">
-                    Live Demo Token: <span className="text-forsythia font-mono">{demoTotp}</span>
+                  <p className="text-[11px] text-mystic/50 mt-2">
+                    Live Demo Token: <span className="text-forsythia font-mono font-bold">{demoTotp}</span>
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center justify-between mb-2">
                 <label className="text-xs mono text-mystic/50">6-digit passcode</label>
                 <CountdownRing />
               </div>
@@ -287,15 +299,17 @@ export default function AuthModal({
               </div>
 
               <button
+                type="button"
                 onClick={autoFillDemo}
                 className="w-full flex items-center justify-center gap-2 text-xs font-medium text-forsythia border border-forsythia/30 rounded-md py-2.5 mb-4 hover:bg-forsythia/10 transition-colors"
               >
                 <Zap size={13} /> Auto-fill demo passcode ({demoTotp})
               </button>
 
-              {error && <p className="text-xs text-saffron mb-3">{error}</p>}
+              {error && <p className="text-xs text-saffron mb-3 text-center">{error}</p>}
 
               <button
+                type="button"
                 onClick={confirmAndLaunch}
                 className="w-full py-2.5 rounded-md text-sm font-medium text-oceanic bg-gradient-to-r from-forsythia to-saffron hover:shadow-glow transition-shadow duration-500"
               >

@@ -257,11 +257,10 @@ export default function CopilotTab() {
             <button
               key={f}
               onClick={() => setFormat(f)}
-              className={`text-[11px] mono px-2.5 py-1 rounded-full border capitalize transition-colors ${
-                format === f
+              className={`text-[11px] mono px-2.5 py-1 rounded-full border capitalize transition-colors ${format === f
                   ? 'border-forsythia text-forsythia bg-forsythia/10 font-semibold'
                   : 'border-surface-border text-mystic/50 hover:text-mystic'
-              }`}
+                }`}
             >
               {f === 'auto' ? 'Auto (AI Recommended)' : f}
             </button>

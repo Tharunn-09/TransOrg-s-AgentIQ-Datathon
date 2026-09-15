@@ -212,45 +212,159 @@ export async function askAgenticCopilot(query: string, chart_override?: string) 
     // fallback
   }
 
-  // Smart local dataset fallback engine for Copilot queries
+  // Smart local dataset fallback engine for Copilot queries (used on Render / static / offline)
   const q = query.toLowerCase();
-  if (q.includes('state') || q.includes('failure')) {
+
+  // 1. Success vs Failed
+  if (q.includes('success vs fail') || q.includes('successful vs failed') || (q.includes('success') && q.includes('fail'))) {
     return {
       status: 'success',
-      chart_type: 'bar',
-      summary: 'State-by-state telemetry shows that Uttar Pradesh and Delhi experience elevated gateway failure rates (~10-11%), whereas Karnataka and Gujarat maintain resilient sub-8% failure benchmarks.',
-      dataset: { data: REAL_DATASET_SNAPSHOT.state_data, xKey: 'state', yKey: 'failure_rate', label: 'Failure rate by state' }
+      chart_type: chart_override || 'bar',
+      summary: 'Daily transaction telemetry highlights an overall 92.4% payment success rate across all 14 monitored days, with failure counts consistently bounded below 10%.',
+      dataset: {
+        data: REAL_DATASET_SNAPSHOT.daily_trends,
+        xKey: 'txn_date',
+        yKey: 'failed_count',
+        series: [
+          { key: 'success_count', name: 'Success Txns', color: '#10B981' },
+          { key: 'failed_count', name: 'Failed Txns', color: '#FF9932' }
+        ],
+        label: 'Daily Success vs Failed Transactions'
+      }
     };
   }
-  if (q.includes('categor') || q.includes('chargeback') || q.includes('ratio')) {
+
+  // 2. Volume by Merchant Category
+  if ((q.includes('category') || q.includes('spending')) && (q.includes('volume') || q.includes('amount') || q.includes('total'))) {
     return {
       status: 'success',
-      chart_type: 'bar',
-      summary: 'Merchant categories Crypto & Trading and Gaming & Gambling exhibit the highest dispute concentrations (>20% chargeback ratio), requiring immediate automated velocity gating.',
-      dataset: { data: REAL_DATASET_SNAPSHOT.category_performance, xKey: 'category', yKey: 'chargeback_ratio', label: 'Chargeback ratio by category' }
+      chart_type: chart_override || 'bar',
+      summary: 'Apparel & Fashion and Utilities lead overall transaction settlement volume, processing over ₹1.5 Cr each across the 14-day window.',
+      dataset: {
+        data: REAL_DATASET_SNAPSHOT.category_performance,
+        xKey: 'category',
+        yKey: 'total_volume',
+        label: 'Transaction Volume by Merchant Category (₹)'
+      }
     };
   }
-  if (q.includes('dispute') && !q.includes('trend')) {
+
+  // 3. Highest Chargeback Ratio by Category
+  if ((q.includes('ratio') || q.includes('rate')) && (q.includes('category') || q.includes('chargeback') || q.includes('cb'))) {
     return {
       status: 'success',
-      chart_type: 'donut',
-      summary: 'Canonical dispute breakdown reveals FRAUD_ATO account takeover as the dominant dispute category, followed by CUSTOMER_DISPUTE_OTHER and NON_DELIVERY.',
-      dataset: { data: REAL_DATASET_SNAPSHOT.dispute_reasons, xKey: 'name', yKey: 'value', label: 'Dispute reasons distribution' }
+      chart_type: chart_override || 'bar',
+      summary: 'Crypto & Trading (22.4%) and Gaming & Gambling (18.7%) exhibit the highest dispute concentrations, requiring automated velocity threshold enforcement.',
+      dataset: {
+        data: REAL_DATASET_SNAPSHOT.category_performance,
+        xKey: 'category',
+        yKey: 'chargeback_ratio',
+        label: 'Chargeback-to-Transaction Ratio (%) by Category'
+      }
     };
   }
-  if (q.includes('merchant') || q.includes('spike')) {
+
+  // 4. Top Disputed Merchants
+  if (q.includes('highest chargeback') || q.includes('merchant') || q.includes('spike')) {
     return {
       status: 'success',
-      chart_type: 'bar',
-      summary: 'Top disputed merchants are led by TechZone Mobiles and Star Gold Traders, which account for the highest concentration of filed chargebacks.',
-      dataset: { data: REAL_DATASET_SNAPSHOT.top_dispute_merchants, xKey: 'merchant_name', yKey: 'dispute_count', label: 'Top 10 disputed merchants' }
+      chart_type: chart_override || 'bar',
+      summary: 'Top disputed merchants are led by TechZone Mobiles (320 chargebacks) and Star Gold Traders, representing prime targets for underwriting and settlement review.',
+      dataset: {
+        data: REAL_DATASET_SNAPSHOT.top_dispute_merchants,
+        xKey: 'merchant_name',
+        yKey: 'dispute_count',
+        label: 'Top 10 Merchants by Chargeback Count'
+      }
     };
   }
+
+  // 5. Severity Breakdown
+  if (q.includes('severit')) {
+    return {
+      status: 'success',
+      chart_type: chart_override || 'bar',
+      summary: 'Severity distribution categorizes filed disputes into priority queues: Critical disputes require immediate 24-hour bank intervention and asset freeze protocols.',
+      dataset: {
+        data: REAL_DATASET_SNAPSHOT.dispute_severity,
+        xKey: 'severity',
+        yKey: 'count',
+        label: 'Chargebacks by Severity Level'
+      }
+    };
+  }
+
+  // 6. Disputes >7 Days / SLA Delays
+  if (q.includes('7 day') || q.includes('delay') || q.includes('sla') || q.includes('late')) {
+    return {
+      status: 'success',
+      chart_type: chart_override || 'bar',
+      summary: 'Reporting delay telemetry indicates that disputes filed past the 7-day statutory threshold account for significant liability, driven by passive subscription billing and delayed account takeover discovery.',
+      dataset: {
+        data: REAL_DATASET_SNAPSHOT.sla_histogram,
+        xKey: 'bucket',
+        yKey: 'count',
+        label: 'Dispute Reporting Delay SLA Distribution (Days)'
+      }
+    };
+  }
+
+  // 7. Reason Distribution
+  if (q.includes('reason') || q.includes('cause') || (q.includes('dispute') && !q.includes('trend'))) {
+    return {
+      status: 'success',
+      chart_type: chart_override || 'donut',
+      summary: 'Canonical dispute breakdown reveals FRAUD_ATO (Account Takeover) as the leading dispute driver (38.4%), followed by CUSTOMER_DISPUTE_OTHER (26.1%) and NON_DELIVERY (20.8%).',
+      dataset: {
+        data: REAL_DATASET_SNAPSHOT.dispute_reasons,
+        xKey: 'name',
+        yKey: 'value',
+        label: 'Dispute Reasons Distribution'
+      }
+    };
+  }
+
+  // 8. Hourly Failures
+  if (q.includes('hour') || q.includes('time of day')) {
+    return {
+      status: 'success',
+      chart_type: chart_override || 'bar',
+      summary: 'Hourly gateway failure rates remain stable across the 24-hour cycle (6-9%), with slight peaks observed during high-velocity evening peak hours (19:00-21:00).',
+      dataset: {
+        data: REAL_DATASET_SNAPSHOT.hourly_failures,
+        xKey: 'hour',
+        yKey: 'failure_rate',
+        label: 'Hourly Gateway Failure Rate (%)'
+      }
+    };
+  }
+
+  // 9. State / Regional Telemetry
+  if (q.includes('state') || q.includes('city') || q.includes('region') || q.includes('delhi') || q.includes('punjab') || q.includes('maharashtra')) {
+    return {
+      status: 'success',
+      chart_type: chart_override || 'bar',
+      summary: 'Geospatial distribution across the 9 active states shows Maharashtra (16.9%) and Rajasthan (16.8%) with elevated dispute rates, while Uttar Pradesh maintains the lowest risk tier (10.0%).',
+      dataset: {
+        data: REAL_DATASET_SNAPSHOT.state_data,
+        xKey: 'state',
+        yKey: 'dispute_ratio',
+        label: 'Dispute Ratio (%) by State'
+      }
+    };
+  }
+
+  // Default: Daily Volume Trend
   return {
     status: 'success',
-    chart_type: 'area',
-    summary: '14-day rolling UPI volume demonstrates steady daily transaction throughput across the multi-bank mesh with peak traffic on Jan 10-14.',
-    dataset: { data: REAL_DATASET_SNAPSHOT.daily_trends, xKey: 'txn_date', yKey: 'total_volume', label: 'Daily processed volume trend' }
+    chart_type: chart_override || 'area',
+    summary: '14-day rolling UPI volume demonstrates steady daily transaction throughput of ~₹50-60 Lakhs per day across the multi-bank payment mesh.',
+    dataset: {
+      data: REAL_DATASET_SNAPSHOT.daily_trends,
+      xKey: 'txn_date',
+      yKey: 'total_volume',
+      label: 'Daily Processed Volume Trend (₹)'
+    }
   };
 }
 

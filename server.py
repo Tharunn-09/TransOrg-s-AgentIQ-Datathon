@@ -563,18 +563,19 @@ def ask_agent(req: QueryRequest):
     fig_json = res["figure"].to_json() if "figure" in res else None
     
     # Extract clean dataset representation for Recharts / React UI
-    dataset = None
-    data_df = res.get("data")
-    if isinstance(data_df, pd.DataFrame) and not data_df.empty:
-        cols = list(data_df.columns)
-        x_col = cols[0]
-        y_col = cols[1] if len(cols) > 1 else cols[0]
-        dataset = {
-            "data": df_to_clean_records(data_df),
-            "xKey": x_col,
-            "yKey": y_col,
-            "label": f"Analysis: {req.query}"
-        }
+    dataset = res.get("dataset")
+    if not dataset:
+        data_df = res.get("data")
+        if isinstance(data_df, pd.DataFrame) and not data_df.empty:
+            cols = list(data_df.columns)
+            x_col = cols[0]
+            y_col = cols[1] if len(cols) > 1 else cols[0]
+            dataset = {
+                "data": df_to_clean_records(data_df),
+                "xKey": x_col,
+                "yKey": y_col,
+                "label": f"Analysis: {req.query}"
+            }
 
     # Normalize chart format for UI
     ctype = res.get("chart_type", "bar").lower()

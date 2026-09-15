@@ -7,8 +7,8 @@ export default function ChartCard({
   action,
   className = '',
 }: {
-  title: string;
-  subtitle?: string;
+  title: ReactNode;
+  subtitle?: ReactNode;
   children: ReactNode;
   action?: ReactNode;
   className?: string;

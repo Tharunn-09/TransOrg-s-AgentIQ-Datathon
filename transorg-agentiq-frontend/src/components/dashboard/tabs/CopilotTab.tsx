@@ -3,7 +3,7 @@ import {
   BarChart, Bar, LineChart, Line, AreaChart, Area, PieChart, Pie,
   ScatterChart, Scatter, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend
 } from 'recharts';
-import { Send, Sparkles, Loader2, Bot, Volume2, VolumeX, CheckCircle, Database, Cpu, Activity } from 'lucide-react';
+import { Send, Sparkles, Loader2, Bot, Volume2, VolumeX, CheckCircle } from 'lucide-react';
 import ChartCard from '../ChartCard';
 import { askAgenticCopilot } from '../../../lib/api';
 import { REAL_DATASET_SNAPSHOT } from '../../../lib/datasetSnapshot';
@@ -45,7 +45,6 @@ export default function CopilotTab() {
   const [selectedQuickQuery, setSelectedQuickQuery] = useState<string>('⚖️ Reason Distribution');
   const [format, setFormat] = useState<ChartFormat>('auto');
   const [loading, setLoading] = useState(false);
-  const [executionTimeMs, setExecutionTimeMs] = useState(148);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [result, setResult] = useState<{
     query: string;
@@ -66,7 +65,6 @@ export default function CopilotTab() {
     stopSpeech();
     setIsSpeaking(false);
 
-    const startTime = performance.now();
     const effectiveFmt = overrideFormat || (format === 'auto' ? undefined : format);
 
     if (quickLabel) {
@@ -79,8 +77,6 @@ export default function CopilotTab() {
 
     try {
       const res = await askAgenticCopilot(q, effectiveFmt);
-      const elapsed = Math.round(performance.now() - startTime);
-      setExecutionTimeMs(Math.max(85, elapsed));
 
       if (res?.dataset) {
         setResult({
@@ -373,32 +369,8 @@ export default function CopilotTab() {
       {/* Real-time Query Telemetry & Result Display */}
       {result && (
         <ChartCard
-          title={
-            <div className="flex flex-wrap items-center gap-2.5">
-              <span>{result.dataset.label}</span>
-              {selectedQuickQuery && (
-                <span className="px-2 py-0.5 rounded text-[11px] font-mono bg-forsythia/15 text-forsythia border border-forsythia/40 font-semibold flex items-center gap-1">
-                  <Activity size={11} className="animate-pulse text-forsythia" />
-                  <span>{selectedQuickQuery}</span>
-                </span>
-              )}
-            </div>
-          }
-          subtitle={
-            <div className="flex flex-wrap items-center justify-between gap-2 mt-0.5">
-              <span>Agent Query: “{result.query}”</span>
-              <div className="flex items-center gap-3 text-[11px] font-mono text-mystic/60">
-                <span className="flex items-center gap-1 text-emerald-400">
-                  <Database size={11} />
-                  <span>SQLite Ledger Partition (20,000 Txns)</span>
-                </span>
-                <span className="flex items-center gap-1 text-cyan-400">
-                  <Cpu size={11} />
-                  <span>{executionTimeMs}ms execution latency</span>
-                </span>
-              </div>
-            </div>
-          }
+          title={result.dataset.label}
+          subtitle={`Agent Query: “${result.query}”`}
           action={
             <div className="flex items-center gap-2">
               <button

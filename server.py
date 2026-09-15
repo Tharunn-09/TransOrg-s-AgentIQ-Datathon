@@ -559,8 +559,12 @@ def ask_agent(req: QueryRequest):
         action_type="AGENTIC_AI_QUERY",
         details=f"Prompt: {req.query} | Format: {req.chart_override or 'Auto'}"
     )
-    res = agent.process_query(req.query, chart_override=req.chart_override)
-    fig_json = res["figure"].to_json() if "figure" in res else None
+    fig_json = None
+    if "figure" in res and res["figure"] is not None:
+        try:
+            fig_json = res["figure"].to_json()
+        except Exception:
+            fig_json = None
     
     # Extract clean dataset representation for Recharts / React UI
     dataset = res.get("dataset")

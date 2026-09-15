@@ -22,6 +22,73 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 
+def safe_plotly_area(df: pd.DataFrame, x: str, y: str, title: str):
+    """Safe Plotly Area constructor resilient to Python 3.14 template bug."""
+    try:
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(
+            x=df[x],
+            y=df[y],
+            mode='lines+markers',
+            fill='tozeroy',
+            line=dict(color='#FFC801', width=2.5),
+            fillcolor='rgba(255, 200, 1, 0.15)'
+        ))
+        fig.update_layout(
+            title=title,
+            template="plotly_dark",
+            paper_bgcolor="#10232B",
+            plot_bgcolor="#0E1F27",
+            font=dict(color="#D9E8E2")
+        )
+        return fig
+    except Exception:
+        return None
+
+
+def safe_plotly_bar(df: pd.DataFrame, x: str, y: str, title: str, color_seq=None):
+    """Safe Plotly Bar constructor resilient to Python 3.14 template bug."""
+    try:
+        fig = go.Figure()
+        fig.add_trace(go.Bar(
+            x=df[x],
+            y=df[y],
+            marker_color=color_seq or '#FFC801'
+        ))
+        fig.update_layout(
+            title=title,
+            template="plotly_dark",
+            paper_bgcolor="#10232B",
+            plot_bgcolor="#0E1F27",
+            font=dict(color="#D9E8E2")
+        )
+        return fig
+    except Exception:
+        return None
+
+
+def safe_plotly_pie(df: pd.DataFrame, names: str, values: str, title: str):
+    """Safe Plotly Donut constructor resilient to Python 3.14 template bug."""
+    try:
+        fig = go.Figure()
+        fig.add_trace(go.Pie(
+            labels=df[names],
+            values=df[values],
+            hole=0.45,
+            marker=dict(colors=['#FFC801', '#FF9932', '#114C5A', '#D9E8E2', '#9BAEAF', '#193542'])
+        ))
+        fig.update_layout(
+            title=title,
+            template="plotly_dark",
+            paper_bgcolor="#10232B",
+            plot_bgcolor="#0E1F27",
+            font=dict(color="#D9E8E2")
+        )
+        return fig
+    except Exception:
+        return None
+
+
 class AgenticGraphAI:
     """
     Hybrid NLP & LLM Intent Classifier and Dynamic Chart Synthesizer.
@@ -185,7 +252,7 @@ class AgenticGraphAI:
             ).reset_index().dropna()
             
             c_type = chart_override or "area"
-            fig = px.area(daily, x='txn_date', y='total_volume', title="📈 Daily UPI Transaction Volume Trend (₹)", template="plotly_dark", color_discrete_sequence=["#FFC801"])
+            fig = safe_plotly_area(daily, 'txn_date', 'total_volume', "📈 Daily UPI Transaction Volume Trend (₹)")
             
             peak_day = daily.loc[daily['total_volume'].idxmax()]
             ctx_summary = f"Total volume: ₹{daily['total_volume'].sum():,.2f} across {daily['tx_count'].sum():,} txns. Peak day: {peak_day['txn_date']} (₹{peak_day['total_volume']:,.2f}). Avg daily: ₹{daily['total_volume'].mean():,.2f}."
@@ -216,7 +283,7 @@ class AgenticGraphAI:
             cat_data = cat_data.sort_values(by='total_volume', ascending=False)
             
             c_type = chart_override or "bar"
-            fig = px.bar(cat_data, x='category', y='total_volume', title="🏢 Total Transaction Volume by Merchant Category", template="plotly_dark", color='total_volume', color_continuous_scale="Blues")
+            fig = safe_plotly_bar(cat_data, 'category', 'total_volume', "🏢 Total Transaction Volume by Merchant Category")
             top_cat = cat_data.iloc[0]
             ctx_summary = f"Category breakdown: Top category is {top_cat['category']} with ₹{top_cat['total_volume']:,.2f}. Total categories: {len(cat_data)}."
             
@@ -245,14 +312,18 @@ class AgenticGraphAI:
                 total=('txn_id', 'count')
             ).reset_index().dropna()
             
-            fig = go.Figure()
-            fig.add_trace(go.Bar(x=daily['txn_date'], y=daily['success_count'], name='Success', marker_color='#10b981'))
-            fig.add_trace(go.Bar(x=daily['txn_date'], y=daily['failed_count'], name='Failed', marker_color='#ef4444'))
-            fig.update_layout(barmode='stack', title="📊 Daily UPI Transaction Status (Success vs Failed)", template="plotly_dark")
+            fig = None
+            try:
+                fig = go.Figure()
+                fig.add_trace(go.Bar(x=daily['txn_date'], y=daily['success_count'], name='Success', marker_color='#10b981'))
+                fig.add_trace(go.Bar(x=daily['txn_date'], y=daily['failed_count'], name='Failed', marker_color='#ef4444'))
+                fig.update_layout(barmode='stack', title="📊 Daily UPI Transaction Status (Success vs Failed)", template="plotly_dark")
+            except Exception:
+                pass
             
             total_fail = int(daily['failed_count'].sum())
             total_succ = int(daily['success_count'].sum())
-            fail_rate = (total_fail / (total_fail + total_succ)) * 100
+            fail_rate = (total_fail / (total_fail + total_succ)) * 100 if (total_fail + total_succ) > 0 else 0
             ctx_summary = f"Overall failure rate: {fail_rate:.2f}% ({total_fail:,} failed out of {total_fail + total_succ:,})."
             
             llm_text = self._call_llm_for_insight(query, ctx_summary)
@@ -283,7 +354,7 @@ class AgenticGraphAI:
             mch_cb['merchant_name'] = mch_cb['merchant_name_clean'].fillna(mch_cb['merchant_id'])
             top10 = mch_cb.sort_values(by='dispute_count', ascending=False).head(10)
             
-            fig = px.bar(top10, x='dispute_count', y='merchant_name', orientation='h', title="🚨 Top 10 Merchants by Total Chargebacks", template="plotly_dark", color='dispute_count', color_continuous_scale="Reds")
+            fig = safe_plotly_bar(top10, 'merchant_name', 'dispute_count', "🚨 Top 10 Merchants by Total Chargebacks", color_seq='#FF9932')
             top1 = top10.iloc[0]
             ctx_summary = f"Top merchant: {top1['merchant_name']} ({top1['merchant_id']}) with {top1['dispute_count']} disputes. Category: {top1['merchant_category_clean']}."
             
@@ -311,7 +382,7 @@ class AgenticGraphAI:
             reasons.columns = ['name', 'value']
             
             c_type = chart_override or "donut"
-            fig = px.pie(reasons, names='name', values='value', title="⚖️ Chargeback Dispute Reason Distribution", template="plotly_dark", hole=0.45)
+            fig = safe_plotly_pie(reasons, 'name', 'value', "⚖️ Chargeback Dispute Reason Distribution")
             top_reason = reasons.iloc[0]
             ctx_summary = f"Dispute reasons: Top reason is {top_reason['name']} with {top_reason['value']} cases ({top_reason['value']/len(self.df_cb)*100:.1f}%). Total categories: {len(reasons)}."
             
@@ -337,7 +408,7 @@ class AgenticGraphAI:
             sev = self.df_cb['severity_clean'].value_counts().reset_index()
             sev.columns = ['severity', 'count']
             
-            fig = px.bar(sev, x='severity', y='count', title="⚠️ Chargeback Breakdown by Severity Level", template="plotly_dark", color='severity')
+            fig = safe_plotly_bar(sev, 'severity', 'count', "⚠️ Chargeback Breakdown by Severity Level")
             crit_count = int((self.df_cb['severity_clean'] == 'CRITICAL').sum())
             ctx_summary = f"Severity levels: Critical disputes: {crit_count}. High: {int((self.df_cb['severity_clean']=='HIGH').sum())}. Total disputes: {len(self.df_cb)}."
             
@@ -370,7 +441,7 @@ class AgenticGraphAI:
             cat_perf['category'] = cat_perf['merchant_category_clean']
             cat_perf = cat_perf.sort_values(by='chargeback_ratio', ascending=False)
             
-            fig = px.bar(cat_perf, x='category', y='chargeback_ratio', title="🎯 Chargeback-to-Transaction Ratio (%) by Category", template="plotly_dark", color='chargeback_ratio', color_continuous_scale="Viridis")
+            fig = safe_plotly_bar(cat_perf, 'category', 'chargeback_ratio', "🎯 Chargeback-to-Transaction Ratio (%) by Category")
             top_cat = cat_perf.iloc[0]
             ctx_summary = f"Highest dispute ratio category: {top_cat['category']} at {top_cat['chargeback_ratio']:.2f}% ({int(top_cat['cb_count'])} disputes on {int(top_cat['tx_count'])} txns)."
             
@@ -400,7 +471,7 @@ class AgenticGraphAI:
             sla_data = [{'bucket': b, 'count': int(delay_binned[b])} for b in labels]
             sla_df = pd.DataFrame(sla_data)
             
-            fig = px.bar(sla_df, x='bucket', y='count', title="⏱️ Dispute Reporting Delay SLA Distribution", template="plotly_dark", color='count')
+            fig = safe_plotly_bar(sla_df, 'bucket', 'count', "⏱️ Dispute Reporting Delay SLA Distribution")
             long_delay_count = int(sum(delay_binned[b] for b in ['8-10d', '11-14d', '15-20d', '21d+']))
             ctx_summary = f"Long delay disputes (>7 days): {long_delay_count} cases ({long_delay_count/len(self.df_cb)*100:.1f}%) reported after 7 days."
             
@@ -430,7 +501,7 @@ class AgenticGraphAI:
             hourly['failure_rate'] = np.round((hourly['failed'] / hourly['total']) * 100, 1)
             hourly['hour'] = hourly['txn_hour'].apply(lambda h: f"{int(h):02d}:00")
             
-            fig = px.bar(hourly, x='hour', y='failure_rate', title="⏰ Hourly Gateway Failure Rate (%)", template="plotly_dark")
+            fig = safe_plotly_bar(hourly, 'hour', 'failure_rate', "⏰ Hourly Gateway Failure Rate (%)")
             summary = "Hourly gateway failure rates remain stable between 5.8% and 9.4%, with slight elevations during peak evening transaction hours (18:00 - 22:00)."
             dataset = {
                 "data": hourly[['hour', 'failure_rate', 'total', 'failed']].to_dict(orient='records'),
@@ -448,7 +519,7 @@ class AgenticGraphAI:
             states_df['volume'] = states_df['total_volume']
             states_df['dispute_ratio'] = np.round(states_df['cb_ratio_pct'], 1)
             
-            fig = px.bar(states_df, x='state', y='dispute_ratio', title="🗺️ Regional Dispute Ratio (%) by State", template="plotly_dark", color='dispute_ratio')
+            fig = safe_plotly_bar(states_df, 'state', 'dispute_ratio', "🗺️ Regional Dispute Ratio (%) by State")
             summary = "Regional telemetry reveals Maharashtra (16.9%) and Rajasthan (16.8%) experience elevated dispute ratios, while Uttar Pradesh maintains the lowest risk profile (10.0%)."
             dataset = {
                 "data": states_df[['state', 'dispute_ratio', 'volume', 'tx_count']].to_dict(orient='records'),
@@ -462,7 +533,7 @@ class AgenticGraphAI:
         else:
             daily = self.df_tx.groupby('txn_date')['amount_clean'].agg(['count', 'sum']).reset_index().dropna()
             daily.rename(columns={'count': 'tx_count', 'sum': 'total_volume'}, inplace=True)
-            fig = px.scatter(daily, x='tx_count', y='total_volume', title=f"🔍 Activity Analysis for '{query}'", template="plotly_dark")
+            fig = safe_plotly_area(daily, 'txn_date', 'total_volume', f"🔍 Activity Analysis for '{query}'")
             summary = (
                 f"**AI Query Analysis for:** *'{query}'*\n"
                 f"- Interpreted as a multi-variable financial ledger correlation query.\n"

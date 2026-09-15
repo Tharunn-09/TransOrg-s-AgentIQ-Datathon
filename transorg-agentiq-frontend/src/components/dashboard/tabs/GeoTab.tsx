@@ -81,6 +81,7 @@ export default function GeoTab() {
   const totalVolume = useMemo(() => stateData.reduce((acc, s) => acc + (s.volume || 0), 0), [stateData]);
   const totalTxns = useMemo(() => stateData.reduce((acc, s) => acc + (s.tx_count || 0), 0), [stateData]);
   const topDisputeState = useMemo(() => [...stateData].sort((a, b) => (b.dispute_ratio || 0) - (a.dispute_ratio || 0))[0], [stateData]);
+  const lowestDisputeState = useMemo(() => [...stateData].sort((a, b) => (a.dispute_ratio || 0) - (b.dispute_ratio || 0))[0], [stateData]);
   const maxDispute = Math.max(...stateData.map((s) => s.dispute_ratio || 1));
 
   return (
@@ -115,8 +116,8 @@ export default function GeoTab() {
           </div>
           <div>
             <div className="text-[11px] text-mystic/60 uppercase tracking-wider font-semibold">Most Compliant Hub</div>
-            <div className="text-lg font-bold font-mono text-emerald-400 mt-0.5">Uttar Pradesh</div>
-            <div className="text-[10px] text-mystic/50">10.0% chargeback (lowest risk tier)</div>
+            <div className="text-lg font-bold font-mono text-emerald-400 mt-0.5">{lowestDisputeState?.state || 'Uttar Pradesh'}</div>
+            <div className="text-[10px] text-mystic/50">{lowestDisputeState?.dispute_ratio}% chargeback (lowest risk tier)</div>
           </div>
         </div>
 
@@ -126,7 +127,7 @@ export default function GeoTab() {
           </div>
           <div>
             <div className="text-[11px] text-mystic/60 uppercase tracking-wider font-semibold">Active Partition Map</div>
-            <div className="text-lg font-bold font-mono text-cyan-400 mt-0.5">9 States • 10 Metros</div>
+            <div className="text-lg font-bold font-mono text-cyan-400 mt-0.5">{stateData.length} States • {metroLeague.length} Metros</div>
             <div className="text-[10px] text-mystic/50">100% Real-time geo-telemetry sync</div>
           </div>
         </div>

@@ -56,43 +56,29 @@ class AgenticGraphAI:
         if groq_key:
             try:
                 from groq import Groq
-                client = Groq(api_key=groq_key, timeout=4.0)
-                for m_id in ["qwen/qwen3.8-27b", "openai/gpt-oss-120b", "openai/gpt-oss-20b", "llama-3.3-70b-versatile"]:
-                    try:
-                        chat_completion = client.chat.completions.create(
-                            messages=[{"role": "user", "content": prompt}],
-                            model=m_id,
-                            temperature=0.2,
-                            max_tokens=300
-                        )
-                        content = chat_completion.choices[0].message.content
-                        if content and len(content.strip()) > 0:
-                            return content.strip()
-                    except Exception:
-                        continue
+                client = Groq(api_key=groq_key, timeout=2.0)
+                chat_completion = client.chat.completions.create(
+                    messages=[{"role": "user", "content": prompt}],
+                    model="llama-3.3-70b-versatile",
+                    temperature=0.2,
+                    max_tokens=300
+                )
+                content = chat_completion.choices[0].message.content
+                if content and len(content.strip()) > 0:
+                    return content.strip()
             except Exception:
                 pass
 
-        # 2. Try Google Gemini (Gemini 3.6 Flash / 2.5 Flash / 2.0 Flash)
+        # 2. Try Google Gemini (Gemini Flash)
         gemini_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY") or (self.api_key if self.provider == "gemini" else None)
         if gemini_key:
             try:
                 import google.generativeai as genai
                 genai.configure(api_key=gemini_key)
-                for gemini_model_id in [
-                    "gemini-3.6-flash",
-                    "gemini-2.5-flash",
-                    "gemini-2.0-flash",
-                    "gemini-1.5-flash",
-                    "models/gemini-1.5-flash",
-                ]:
-                    try:
-                        model = genai.GenerativeModel(gemini_model_id)
-                        response = model.generate_content(prompt, request_options={"timeout": 5.0})
-                        if response and response.text:
-                            return response.text.strip()
-                    except Exception:
-                        continue
+                model = genai.GenerativeModel("gemini-1.5-flash")
+                response = model.generate_content(prompt, request_options={"timeout": 2.5})
+                if response and response.text:
+                    return response.text.strip()
             except Exception:
                 pass
 
